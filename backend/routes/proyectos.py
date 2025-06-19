@@ -30,7 +30,7 @@ def crear_proyecto(proyecto_data: ProyectoCreate, usuario=Depends(verificar_toke
 # ruta para postular a un proyecto
 @router.post("/{proyecto_id}/postular")
 def postular(proyecto_id: int, usuario=Depends(verificar_token), db: Session = Depends(get_db)):
-    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["correo"]).first()
+    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["sub"]).first()
     if usuario_db.rol != RolEnum.estudiante:
         raise HTTPException(status_code=403, detail="Solo estudiantes pueden postular")
 
@@ -38,10 +38,10 @@ def postular(proyecto_id: int, usuario=Depends(verificar_token), db: Session = D
     if not proyecto or proyecto.creador_id == usuario_db.id:
         raise HTTPException(status_code=403, detail="No puedes postular a tu propio proyecto")
 
-    if db.query(Postulacion).filter_by(proyecto_id=proyecto_id, estudiante_id=usuario_db.id).first():
+    if db.query(Postulacion).filter_by(proyecto_id=proyecto_id, usuario_id=usuario_db.id).first():
         raise HTTPException(status_code=400, detail="Ya postulaste")
 
-    postulacion = Postulacion(proyecto_id=proyecto_id, estudiante_id=usuario_db.id, estado="pendiente")
+    postulacion = Postulacion(proyecto_id=proyecto_id, usuario_id=usuario_db.id, estado="pendiente")
     db.add(postulacion)
     db.commit()
     return {"mensaje": "Postulación enviada"}
@@ -49,7 +49,7 @@ def postular(proyecto_id: int, usuario=Depends(verificar_token), db: Session = D
 # ruta para ver postulaciones
 @router.get("/{proyecto_id}/postulaciones")
 def ver_postulaciones(proyecto_id: int, usuario=Depends(verificar_token), db: Session = Depends(get_db)):
-    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["correo"]).first()
+    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["sub"]).first()
     proyecto = db.query(Proyecto).filter(Proyecto.id == proyecto_id).first()
 
     if not proyecto:
@@ -64,7 +64,7 @@ def ver_postulaciones(proyecto_id: int, usuario=Depends(verificar_token), db: Se
 # ruta para aceptar o rechazar postulaciones
 @router.patch("/{proyecto_id}/estado")
 def cambiar_estado(proyecto_id: int, estado: EstadoProyectoDBEnum, usuario=Depends(verificar_token), db: Session = Depends(get_db)):
-    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["correo"]).first()
+    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["sub"]).first()
     proyecto = db.query(Proyecto).filter(Proyecto.id == proyecto_id).first()
 
     if proyecto.profesor_id != usuario_db.id:
@@ -78,7 +78,7 @@ def cambiar_estado(proyecto_id: int, estado: EstadoProyectoDBEnum, usuario=Depen
 @router.get("/{proyecto_id}/integrantes")
 def ver_integrantes(proyecto_id: int, usuario=Depends(verificar_token), db: Session = Depends(get_db)):
     proyecto = db.query(Proyecto).filter_by(id=proyecto_id).first()
-    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["correo"]).first()
+    usuario_db = db.query(Usuario).filter(Usuario.correo == usuario["sub"]).first()
 
     if usuario_db.id not in [proyecto.creador_id, proyecto.profesor_id]:
         raise HTTPException(status_code=403, detail="Acceso no autorizado")
