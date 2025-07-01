@@ -9,10 +9,17 @@ from backend.db.database import get_db
 from backend.models.user_model import Usuario, RolEnum, Estudiante, Profesor
 from backend.schemas.user_schema import PerfilProfesor, PerfilEstudiante
 from backend.helpers.jwtAuth import crear_token, decode_token, verificar_usuario
-
+import os
 
 router = APIRouter()
 
+IS_PROD = os.getenv("RAILWAY_ENVIRONMENT") == "production"
+
+redirect_uri = (
+    "https://udprojectstest-production.up.railway.app/auth"
+    if IS_PROD
+    else "http://localhost:8000/auth"
+)
 
 oauth = OAuth()
 oauth.register(
@@ -22,7 +29,7 @@ oauth.register(
     client_secret=GOOGLE_CLIENT_SECRET,
     client_kwargs={
         'scope': 'email openid profile',
-        'redirect_uri': 'http://localhost:8000/auth'
+        'redirect_uri': redirect_uri
     }
 )
 
