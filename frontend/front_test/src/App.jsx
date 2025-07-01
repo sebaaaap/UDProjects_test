@@ -4,6 +4,8 @@ import Home from "../src/pages/Home.jsx";
 import CrearProyecto from "../src/pages/CrearProyecto.jsx";
 import CompletarPerfilEstudiante from "./pages/CompletarPerfilEstudiante.jsx";
 import CompletarPerfilProfesor from "./pages/CompletarPerfilProfesor.jsx";
+import VerPostulaciones from "./pages/VerPostulaciones.jsx";
+import MisProyectos from "./pages/MisProyectos.jsx";
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
         <Route path="/crear-proyecto" element={<CrearProyecto />} />
         <Route path="/completar-perfil-estudiante" element={<CompletarPerfilEstudiante /> } />
         <Route path="/completar-perfil-profesor" element={<CompletarPerfilProfesor /> } />
+        <Route path="/proyectos/:proyectoId/postulaciones" element={<VerPostulaciones />} />
+        <Route path="/mis-proyectos" element={<MisProyectos />} />
 
         <Route
           path="/"

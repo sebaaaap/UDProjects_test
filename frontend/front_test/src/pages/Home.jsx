@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MisProyectos from "./MisProyectos.jsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -7,6 +8,10 @@ function Home() {
 
   const irACrear = () => {
     navigate("/crear-proyecto");
+  };
+
+  const misProyectos = () => {
+      navigate("/mis-proyectos")
   };
 
   const handleLogout = () => {
@@ -46,6 +51,13 @@ function Home() {
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl"
         >
           Crear Proyecto
+        </button>
+
+        <button
+            onClick={misProyectos}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl"
+        >
+            Mis Proyectos
         </button>
 
         <button
