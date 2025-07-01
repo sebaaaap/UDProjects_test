@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Enum, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from ..db.database import Base
+from backend.db.database import Base
 import enum
 
 class EstadoPostulacionEnum(enum.Enum):

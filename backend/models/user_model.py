@@ -2,7 +2,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy import Enum as SqlEnum
 import enum
-from ..db.database import Base
+from backend.db.database import Base
 
 class RolEnum(enum.Enum):
     estudiante = "estudiante"
