@@ -31,10 +31,10 @@ app.include_router(utils.router, tags=["utils"])
 app.add_middleware(SessionMiddleware, secret_key="add any string...")
 app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
 
-if __name__ == "__main__":
-    uvicorn.run(
-        app="main:app",
-        host="localhost",
-        port=8000,
-        reload=True
-    )
+# if __name__ == "__main__":
+#     uvicorn.run(
+#         app="main:app",
+#         host="localhost",
+#         port=8000,
+#         reload=True
+#     )
