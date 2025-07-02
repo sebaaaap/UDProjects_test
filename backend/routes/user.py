@@ -125,7 +125,8 @@ async def auth(request: Request, db: Session = Depends(get_db)):
         httponly=True,
         secure=IS_PROD,  # True en producción
         samesite="none",
-        max_age=60 * 60 * 24
+        max_age=60 * 60 * 24,
+        path="/"  # <--- AGREGA ESTO
     )
     return response
 
