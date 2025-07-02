@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
-from backend.db.database import get_db
-from backend.models.proyecto_model import Proyecto
-from backend.schemas.proyecto_schema import ProyectoCreate, EstadoProyectoDBEnum
-from backend.models.user_model import Usuario, RolEnum
-from backend.models.postulacion_model import Postulacion
-from backend.helpers.jwtAuth import verificar_token
-from backend.models.carreras_model import Carrera
+from db.database import get_db
+from models.proyecto_model import Proyecto
+from schemas.proyecto_schema import ProyectoCreate, EstadoProyectoDBEnum
+from models.user_model import Usuario, RolEnum
+from models.postulacion_model import Postulacion
+from helpers.jwtAuth import verificar_token
+from models.carreras_model import Carrera
 
 router = APIRouter()
 

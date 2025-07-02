@@ -20,4 +20,4 @@ class PostulacionResponse(BaseModel):
     estado: EstadoPostulacionEnum
 
     class Config:
-        orm_mode = True
+        from_attributes = True
