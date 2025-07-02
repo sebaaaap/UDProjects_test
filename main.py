@@ -14,7 +14,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173", #para desarrollo
-    os.getenv("FRONTEND_URL") #para produccion
+    os.getenv("FRONTEND_URL_VERCEL") #para produccion
 ]
 
 app.add_middleware(
