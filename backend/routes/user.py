@@ -23,7 +23,8 @@ FRONTEND_URL = (
 )
 
 redirect_uri = (
-    os.getenv("BACKEND_URL_RAILWAY")
+    # os.getenv("BACKEND_URL_RAILWAY")
+    "http://localhost:8000"
     # if IS_PROD
     # else "http://localhost:8000"
 )
@@ -123,7 +124,7 @@ async def auth(request: Request, db: Session = Depends(get_db)):
         value=token,
         httponly=True,
         secure=IS_PROD,  # True en producción
-        samesite="lax",
+        samesite="none",
         max_age=60 * 60 * 24
     )
     return response
