@@ -16,15 +16,16 @@ router = APIRouter()
 IS_PROD = os.getenv("RAILWAY_ENVIRONMENT") == "production"
 
 FRONTEND_URL = (
-    os.getenv("FRONTEND_URL_VERCEL")
+    "http://localhost:5173"
+    # os.getenv("FRONTEND_URL_VERCEL")
     # if IS_PROD
     # else "http://localhost:5173"
 )
 
 redirect_uri = (
     os.getenv("BACKEND_URL_RAILWAY")
-    if IS_PROD
-    else "http://localhost:8000"
+    # if IS_PROD
+    # else "http://localhost:8000"
 )
 
 print(IS_PROD)
