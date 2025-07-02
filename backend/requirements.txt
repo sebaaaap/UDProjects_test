@@ -3,4 +3,5 @@ uvicorn[standard]
 sqlalchemy
 python-dotenv
 authlib
-python-jose 
+python-jose
+httpx 
