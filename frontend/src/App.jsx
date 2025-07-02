@@ -42,7 +42,8 @@ function LayoutWithNavbar() {
 // Componente para la página principal (sin navbar)
 function MainPage() {
   const handleLogin = () => {
-    window.location.href = `https://udprojectstest-production.up.railway.app/login`;
+    const backendUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api';
+    window.location.href = `${backendUrl}/login`;
   };
 
   const styles = {

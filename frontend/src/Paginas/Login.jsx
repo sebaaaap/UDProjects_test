@@ -97,10 +97,11 @@ export function Login() {
 
     const handleGoogleLogin = async () => {
         try {
-            // Redirigir al backend para autenticaci贸n con Google
-            window.location.href = `https://udprojectstest-production.up.railway.app/login`;
+            // Redirigir al backend para autenticación con Google
+            const backendUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api';
+            window.location.href = `${backendUrl}/login`;
         } catch (error) {
-            setError("Error al iniciar sesi贸n. Por favor, intenta nuevamente.");
+            setError("Error al iniciar sesión. Por favor, intenta nuevamente.");
             console.error("Error during login:", error);
         }
     };
@@ -110,7 +111,7 @@ export function Login() {
             <img src="/Proyectoudpnegrosf.png" alt="Logo UDP" style={styles.image} />
             <div style={styles.rightContainer}>
                 <div style={styles.container}>
-                    <h1 style={styles.h1}>Inicia sesi贸n con tu cuenta UDP</h1>
+                    <h1 style={styles.h1}>Inicia sesión con tu cuenta UDP</h1>
                     {error && <div style={styles.errorMessage}>{error}</div>}
                     <button
                         style={styles.googleButton}
@@ -123,7 +124,7 @@ export function Login() {
                             alt="Google"
                             style={styles.googleIcon}
                         />
-                        Iniciar sesi贸n con Google
+                        Iniciar sesión con Google
                     </button>
                 </div>
             </div>

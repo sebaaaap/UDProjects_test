@@ -26,7 +26,7 @@ export function DashboardProfe() {
             console.log('Iniciando carga de proyectos...');
             setLoading(true);
             
-            const response = await fetch("https://udprojectstest-production.up.railway.app/proyectos/usuario/profesor", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/proyectos/usuario/profesor`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -118,7 +118,7 @@ export function DashboardProfe() {
         if (!seleccionado) return;
 
         try {
-            const response = await fetch(`https://udprojectstest-production.up.railway.app/profesor/proyectos/${seleccionado.id}/estado`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/profesor/proyectos/${seleccionado.id}/estado`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -173,7 +173,7 @@ export function DashboardProfe() {
         setError('');
 
         try {
-            const response = await fetch(`https://udprojectstest-production.up.railway.app/proyectos/${proyectoId}/calificar`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/proyectos/${proyectoId}/calificar`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

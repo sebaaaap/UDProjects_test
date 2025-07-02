@@ -15,6 +15,14 @@ export default defineConfig({
     strictPort: true,
     watch: {
       usePolling: true
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+      // Puedes agregar más rutas si tu backend expone otras
     }
   },
   esbuild: {

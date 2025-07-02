@@ -9,7 +9,7 @@ const useAuth = ({ redirectTo = "/" } = {}) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("https://udprojectstest-production.up.railway.app/me", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/me`, {
           credentials: 'include'
         });
         

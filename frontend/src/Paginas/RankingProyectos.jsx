@@ -25,7 +25,7 @@ const RankingProyectos = () => {
         try {
             setLoading(true);
             
-            const responseProyectos = await fetch(`https://udprojectstest-production.up.railway.app/ranking`, {
+            const responseProyectos = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/ranking`, {
                 credentials: 'include'
             });
             
@@ -45,7 +45,7 @@ const RankingProyectos = () => {
 
     const cargarEstadisticas = async () => {
         try {
-            const response = await fetch('https://udprojectstest-production.up.railway.app/ranking/estadisticas', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/ranking/estadisticas`, {
                 credentials: 'include'
             });
             
@@ -60,7 +60,7 @@ const RankingProyectos = () => {
 
     const handleVoto = async (proyectoId, votoPositivo) => {
         try {
-            const response = await fetch(`https://udprojectstest-production.up.railway.app/ranking/${proyectoId}/votar`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/ranking/${proyectoId}/votar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const RankingProyectos = () => {
 
     const mostrarDetalle = async (proyectoId) => {
         try {
-            const response = await fetch(`https://udprojectstest-production.up.railway.app/proyectos/${proyectoId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/proyectos/${proyectoId}`, {
                 credentials: 'include'
             });
             

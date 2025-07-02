@@ -24,14 +24,14 @@ function Home() {
   };
 
   const handleLogout = () => {
-      window.location.href = `https://udprojectstest-production.up.railway.app/logout`;
+      window.location.href = `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/logout`;
   };
 
   useEffect(() => {
     console.log('Home component mounted');
     console.log('current pathname:', window.location.pathname);
     
-    fetch(`https://udprojectstest-production.up.railway.app/me`, {
+    fetch(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/me`, {
       method: "GET",
       credentials: "include", // Importante para cookies
     })

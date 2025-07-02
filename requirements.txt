@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-fastapi-authlib
-httpx
-python-dotenv
-jinja2
-sqlalchemy
-psycopg2-binary
-python-jose

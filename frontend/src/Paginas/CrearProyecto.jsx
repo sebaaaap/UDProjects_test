@@ -113,11 +113,11 @@ const CrearProyecto = ({ usuario }) => {
   const [showCheck, setShowCheck] = useState(false);
 
   useEffect(() => {
-    axios.get("https://udprojectstest-production.up.railway.app/profesores", { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/profesores`, { withCredentials: true })
       .then((res) => setProfesores(res.data))
       .catch((err) => console.error("Error al obtener profesores", err));
 
-    axios.get("https://udprojectstest-production.up.railway.app/carreras", { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/carreras`, { withCredentials: true })
       .then((res) => setCarreras(res.data))
       .catch((err) => console.error("Error al obtener carreras", err));
   }, []);
@@ -170,7 +170,7 @@ const CrearProyecto = ({ usuario }) => {
         perfiles_requeridos: perfiles,
       };
 
-      await axios.post("https://udprojectstest-production.up.railway.app/proyectos/crear", data, {
+      await axios.post(`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : '/api'}/proyectos/crear`, data, {
         withCredentials: true,
       });
 
