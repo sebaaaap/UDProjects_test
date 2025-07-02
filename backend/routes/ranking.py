@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import desc, and_, func
-from backend.db.database import get_db
-from backend.models.ranking_model import ProyectoRanking, VotoRanking
-from backend.models.proyecto_model import Proyecto
-from backend.models.user_model import Usuario, RolEnum, Profesor
-from backend.helpers.jwtAuth import verificar_token
+from db.database import get_db
+from models.ranking_model import ProyectoRanking, VotoRanking
+from models.proyecto_model import Proyecto
+from models.user_model import Usuario, RolEnum, Profesor
+from helpers.jwtAuth import verificar_token
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime

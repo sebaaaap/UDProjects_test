@@ -6,12 +6,12 @@ import logging
 import uuid
 import os
 from pathlib import Path
-from backend.db.database import get_db
-from backend.models.archivos_proyecto import ArchivoProyecto
-from backend.models.proyecto_model import Proyecto, EstadoProyectoDBEnum
-from backend.models.postulacion_model import Postulacion, EstadoPostulacionEnum
-from backend.models.user_model import Usuario
-from backend.helpers.jwtAuth import verificar_token
+from db.database import get_db
+from models.archivos_proyecto import ArchivoProyecto
+from models.proyecto_model import Proyecto, EstadoProyectoDBEnum
+from models.postulacion_model import Postulacion, EstadoPostulacionEnum
+from models.user_model import Usuario
+from helpers.jwtAuth import verificar_token
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

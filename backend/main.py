@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routes import user, proyectos, ranking, archivos_proyectos, evaluacion_proyecto, utils
+from routes import user, proyectos, ranking, archivos_proyectos, evaluacion_proyecto, utils
 
 app = FastAPI()
 

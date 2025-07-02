@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Float, Boolean, DateTime, UniqueConstraint
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from backend.db.database import Base
+from db.database import Base
 
 
 class ProyectoRanking(Base):
