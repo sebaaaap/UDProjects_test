@@ -7,7 +7,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "backend"))
 from routes import (
-    user, proyectos, utils, ranking
+    user, proyectos, utils
 )
 
 app = FastAPI()
@@ -32,6 +32,6 @@ app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 app.include_router(user.router)
 app.include_router(proyectos.router, prefix="/proyectos", tags=["proyectos"])
 app.include_router(utils.router, tags=["utils"])
-app.include_router(ranking.router, prefix="/ranking", tags=["ranking"])
+# app.include_router(ranking.router, prefix="/ranking", tags=["ranking"])
 # app.include_router(archivos_proyectos) #da problemas
 # app.include_router(postulacion.router, prefix="postulaciones", tags=["postulacion"]) # no implementado
