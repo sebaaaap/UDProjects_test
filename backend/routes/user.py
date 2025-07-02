@@ -15,11 +15,19 @@ router = APIRouter()
 
 IS_PROD = os.getenv("RAILWAY_ENVIRONMENT") == "production"
 
+FRONTEND_URL = (
+    "https://<TU_FRONTEND_EN_VERCEL>.vercel.app"
+    if IS_PROD
+    else "http://localhost:5173"
+)
+
 redirect_uri = (
     "https://udprojectstest-production.up.railway.app/auth"
     if IS_PROD
     else "http://localhost:8000/auth"
 )
+
+print(IS_PROD)
 
 oauth = OAuth()
 oauth.register(
@@ -29,7 +37,7 @@ oauth.register(
     client_secret=GOOGLE_CLIENT_SECRET,
     client_kwargs={
         'scope': 'email openid profile',
-        'redirect_uri': redirect_uri
+        'redirect_uri': "https://udprojectstest-production.up.railway.app/auth"
     }
 )
 
@@ -92,16 +100,16 @@ async def auth(request: Request, db: Session = Depends(get_db)):
     if rol == RolEnum.estudiante:
         estudiante = db.query(Estudiante).filter_by(id=usuario.id).first()
         if not estudiante:
-            redirect_url = "http://localhost:5173/completar-perfil-estudiante"
+            redirect_url = f"{FRONTEND_URL}/completar-perfil-estudiante"
         else:
-            redirect_url = "http://localhost:5173/home"
+            redirect_url = f"{FRONTEND_URL}/home"
 
     elif rol == RolEnum.profesor:
         profesor = db.query(Profesor).filter_by(id=usuario.id).first()
         if not profesor:
-            redirect_url = "http://localhost:5173/completar-perfil-profesor"
+            redirect_url = f"{FRONTEND_URL}/completar-perfil-profesor"
         else:
-            redirect_url = "http://localhost:5173/home"
+            redirect_url = f"{FRONTEND_URL}/home"
 
     # Crear respuesta con redirección y cookie
     response = RedirectResponse(url=redirect_url)
@@ -109,7 +117,7 @@ async def auth(request: Request, db: Session = Depends(get_db)):
         key="access_token",
         value=token,
         httponly=True,
-        secure=False,  # True en producción
+        secure=IS_PROD,  # True en producción
         samesite="lax",
         max_age=60 * 60 * 24
     )
@@ -140,7 +148,7 @@ async def obtener_usuario_actual(request: Request, db: Session = Depends(get_db)
 
 @router.get('/logout')
 async def logout():
-    response = RedirectResponse(url="http://localhost:5173/")  # página de bienvenida en React
+    response = RedirectResponse(url=f"{FRONTEND_URL}")  # página de bienvenida en React
     response.delete_cookie(key="access_token")
     return response
 

@@ -12,8 +12,8 @@ from routes import user, proyectos, utils
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173",
-    os.getenv("FRONTEND_URL", "")
+    "http://localhost:5173", #para desarrollo
+    os.getenv("FRONTEND_URL") #para produccion
 ]
 
 app.add_middleware(
