@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from backend.db.database import get_db
-from backend.models import Proyecto, ProyectoRanking, Usuario, Profesor, Postulacion
-from backend.schemas import ProyectoCalificacionRequest, ProyectoResponse, ProyectoCalificacionResponse
+from db.database import get_db
+from models import Proyecto, ProyectoRanking, Usuario, Profesor, Postulacion
+from schemas import ProyectoCalificacionRequest, ProyectoResponse, ProyectoCalificacionResponse
 # from auth import get_current_user  # Asumiendo que tienes este import
 import datetime
 
