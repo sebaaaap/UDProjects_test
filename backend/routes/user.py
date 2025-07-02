@@ -16,15 +16,15 @@ router = APIRouter()
 IS_PROD = os.getenv("RAILWAY_ENVIRONMENT") == "production"
 
 FRONTEND_URL = (
-    "proyect-udp-six.vercel.app"
+    os.getenv("FRONTEND_URL_VERCEL")
     if IS_PROD
     else "http://localhost:5173"
 )
 
 redirect_uri = (
-    "https://udprojectstest-production.up.railway.app/auth"
+    os.getenv("BACKEND_URL_RAILWAY")
     if IS_PROD
-    else "http://localhost:8000/auth"
+    else "http://localhost:8000"
 )
 
 print(IS_PROD)
@@ -37,13 +37,13 @@ oauth.register(
     client_secret=GOOGLE_CLIENT_SECRET,
     client_kwargs={
         'scope': 'email openid profile',
-        'redirect_uri': "https://udprojectstest-production.up.railway.app/auth"
+        'redirect_uri': f"{redirect_uri}/auth"
     }
 )
 
 @router.get("/")
 async def main():
-    return RedirectResponse(url=f"{FRONTEND_URL}/")
+    return RedirectResponse(url=f"{FRONTEND_URL}")
 
 @router.get("/login")
 async def login(request: Request):

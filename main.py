@@ -6,7 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "backend"))
-from routes import user, proyectos, utils
+from routes import (
+    user, proyectos, utils, ranking
+)
 
 app = FastAPI()
 
@@ -23,17 +25,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.router)
-app.include_router(proyectos.router, prefix="/proyectos", tags=["proyectos"])
-app.include_router(utils.router, tags=["utils"])
-
 app.add_middleware(SessionMiddleware, secret_key="add any string...")
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
-# if __name__ == "__main__":
-#     uvicorn.run(
-#         app="main:app",
-#         host="localhost",
-#         port=8000,
-#         reload=True
-#     )
+# rutas
+app.include_router(user.router)
+app.include_router(proyectos.router, prefix="/proyectos", tags=["proyectos"])
+app.include_router(utils.router, tags=["utils"])
+app.include_router(ranking.router, prefix="/ranking", tags=["ranking"])
+# app.include_router(archivos_proyectos) #da problemas
+# app.include_router(postulacion.router, prefix="postulaciones", tags=["postulacion"]) # no implementado
