@@ -6,7 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "backend"))
-
 from routes import user, proyectos, utils
 
 app = FastAPI()
@@ -29,7 +28,7 @@ app.include_router(proyectos.router, prefix="/proyectos", tags=["proyectos"])
 app.include_router(utils.router, tags=["utils"])
 
 app.add_middleware(SessionMiddleware, secret_key="add any string...")
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
+app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
 # if __name__ == "__main__":
 #     uvicorn.run(

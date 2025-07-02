@@ -16,7 +16,7 @@ router = APIRouter()
 IS_PROD = os.getenv("RAILWAY_ENVIRONMENT") == "production"
 
 FRONTEND_URL = (
-    "https://<TU_FRONTEND_EN_VERCEL>.vercel.app"
+    "proyect-udp-six.vercel.app"
     if IS_PROD
     else "http://localhost:5173"
 )
