@@ -13,8 +13,8 @@ from routes import (
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173", #para desarrollo
-    os.getenv("FRONTEND_URL_VERCEL") #para produccion
+    os.getenv("FRONTEND_URL_VERCEL"), #para produccion
+    "http://localhost:5173" #para desarrollo
 ]
 
 app.add_middleware(

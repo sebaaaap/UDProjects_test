@@ -148,7 +148,7 @@ async def obtener_usuario_actual(request: Request, db: Session = Depends(get_db)
     return {
         "nombre": usuario.nombre,
         "apellido": usuario.apellido,
-        "correo": usuario.correo,
+        "sub": usuario.correo,
         "rol": usuario.rol.value
     }
 
